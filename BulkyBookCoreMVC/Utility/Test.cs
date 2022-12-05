@@ -1,6 +1,6 @@
 ﻿namespace BulkyBookCoreMVC.Utility
 {
-    public class Class
+    public class Test
     {
     }
 }
