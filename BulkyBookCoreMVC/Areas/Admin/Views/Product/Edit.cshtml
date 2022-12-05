@@ -1,0 +1,129 @@
+﻿@model BulkyBookCoreMVC.Models.ViewModels.ProductVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+<div class="container mb-4">
+<div class="border p-3 mt-4">
+    <form method="post" asp-action="Edit" enctype="multipart/form-data">
+
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Product</h2>
+        </div>
+            <input asp-for="Id" hidden />
+
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label asp-for="@Model.Description"></label>
+                    <textarea asp-for="@Model.Description" class="form-control"></textarea>
+                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                </div>
+            </div>
+
+        <div class="row">
+        <div class="mb-3 col-6">
+                    <label asp-for="@Model.ISBN"></label>
+                    <input asp-for="@Model.ISBN" class="form-control" />
+                    <span asp-validation-for="@Model.ISBN" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-6">
+                    <label asp-for="@Model.Author"></label>
+                    <input asp-for="@Model.Author" class="form-control" />
+                    <span asp-validation-for="@Model.Author" class="text-danger"></span>
+        </div>
+
+        </div>
+        
+        <div class="row">
+            <div class="mb-3 mt-4 col-6">
+                    <label asp-for="@Model.ImageURL"></label>
+                    <input type="file" name="file" asp-for="@Model.ImageURL" class="form-control" id="imgInp" />
+
+            </div>
+
+            <div class="mb-3 col-6">
+
+                <label>Current Image</label>
+                    <img src="@Model.ImageURL" class="img" alt="My image" id="blah" style="width:110px;height:140px" />
+            </div>
+       </div>
+
+       <div class="row">
+                <div class="mb-3 col-6">
+                    <label asp-for="@Model.Price"></label>
+                    <input asp-for="@Model.Price" class="form-control" />
+                    <span asp-validation-for="@Model.Price" class="text-danger"></span>
+                </div>
+        
+                <div class="mb-3 col-6">
+
+                </div>
+
+        </div>
+
+            <div class="row">
+
+                <div class="mb-3 col-6">
+                    <label class="control-label">Select Category</label>
+                    <select asp-for="@Model.CategoryId" class="form-control" asp-items="Model.CategoryList">
+                    </select>
+
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label class="control-label">Select CoverType</label>
+                    <select asp-for="@Model.CoverTypeId" class="form-control" asp-items="Model.CoverTypeList">
+                    </select>
+                </div>
+
+            </div>
+
+        <hr />
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a class="btn btn-secondary" asp-action="Index" style="width:150px">
+            Back To List
+        </a>
+
+
+    </form>
+    
+
+</div>
+
+</div>
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        //Preview & Update an image before it is uploaded
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    </script>
+
+
+}
+
+

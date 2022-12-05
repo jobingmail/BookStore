@@ -1,0 +1,29 @@
+﻿@model Company
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<form method="post" asp-action="DeletePOST">
+
+    <input asp-for="Id" hidden />
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" disabled class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="City"></label>
+        <input asp-for="City" disabled class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-trash-fill"></i> Delete
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">
+        Back To List
+    </a>
+
+</form>
