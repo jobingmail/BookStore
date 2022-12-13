@@ -64,7 +64,7 @@
                 <div class="mb-3 col-6">
 
                     <label>Current Image</label>
-                    <img src="" class="img" alt="My image" id="blah" style="width:110px;height:140px" />
+                    <img src="" class="img" alt="My image" id="imgCurrent" style="width:110px;height:140px" />
                 </div>
             </div>
 
@@ -131,7 +131,7 @@
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
-                    $('#blah').attr('src', e.target.result);
+                    $('#imgCurrent').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
