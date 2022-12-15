@@ -17,7 +17,7 @@ namespace BulkyBookCoreMVC.Utility
             {
                 SmtpClient smtp = new SmtpClient("consent.herosite.pro", 587);
 
-                smtp.EnableSsl = false;
+                smtp.EnableSsl = true;
                 smtp.Credentials = new NetworkCredential("info@jobinworkspace.in", "4+*TA!l74oXI");
 
                 String from = "info@jobinworkspace.in";
