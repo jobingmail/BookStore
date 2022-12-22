@@ -6,7 +6,7 @@ using System.Net.Mime;
 
 namespace BulkyBookCoreMVC.Utility
 {
-    public class EmailSender : IEmailSender
+    public class EmailSender : IEmailSender //4+*TA!l74oXI
     {
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
@@ -18,9 +18,9 @@ namespace BulkyBookCoreMVC.Utility
                 SmtpClient smtp = new SmtpClient("consent.herosite.pro", 587);
 
                 smtp.EnableSsl = true;
-                smtp.Credentials = new NetworkCredential("info@jobinworkspace.in", "4+*TA!l74oXI");
+                smtp.Credentials = new NetworkCredential("noreply@jobinworkspace.in", "*79yo98Fz");
 
-                String from = "info@jobinworkspace.in";
+                String from = "noreply@jobinworkspace.in";
                 String to = email;
                 
                 
