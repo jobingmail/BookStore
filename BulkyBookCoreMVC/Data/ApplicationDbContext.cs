@@ -25,6 +25,8 @@ namespace BulkyBookCoreMVC.Data
         public DbSet<OrderHeader> OrderHeaders { get; set; }
 
         public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        public DbSet<ErrorLog> ErrorLogs { get; set; }
         
     }
 }
