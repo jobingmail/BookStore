@@ -71,41 +71,66 @@ namespace WebAppCore6.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ProductVM objVM, IFormFile? file)
         {
-            
-
-            if (ModelState.IsValid)
+            try
             {
-                string wwwRootPath = _hostnvironment.WebRootPath;
-                if (file != null)
+
+                if (ModelState.IsValid)
                 {
-                    string filename = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(wwwRootPath, "Images", "Product");
-                    var extention = Path.GetExtension(file.FileName);
-
-                    var fullpath = Path.Combine(wwwRootPath, uploads, filename + extention);
-
-                    using (var fileStreams = new FileStream(fullpath, FileMode.Create))
+                    string wwwRootPath = _hostnvironment.WebRootPath;
+                    if (file != null)
                     {
-                        file.CopyTo(fileStreams);
+                        string filename = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(wwwRootPath, "Images", "Product");
+                        var extention = Path.GetExtension(file.FileName);
+
+                        var fullpath = Path.Combine(wwwRootPath, uploads, filename + extention);
+
+                        using (var fileStreams = new FileStream(fullpath, FileMode.Create))
+                        {
+                            file.CopyTo(fileStreams);
+                        }
+
+                        objVM.ImageURL = @"/Images/Product/" + filename + extention;
+
                     }
 
-                    objVM.ImageURL = @"/Images/Product/" + filename + extention;
+                    var _product = (Product)objVM;
 
+
+                    try
+                    {
+                        _db.Products?.Add(_product);
+                        _db.SaveChanges();
+                        TempData["success"] = "Product Created Successfully";
+                        return RedirectToAction("Index");
+                    }
+                    catch { }
                 }
-
-                var _product = (Product)objVM;
-
-
-                try
-                {
-                    _db.Products?.Add(_product);
-                    _db.SaveChanges();
-                    TempData["success"] = "Product Created Successfully";
-                    return RedirectToAction("Index");
-                }
-                catch { }
             }
-            
+            catch (Exception ex)
+            {
+                ErrorLog log = new ErrorLog();
+                log.ErrorMessasge = ex.Message;
+
+                _db.ErrorLogs.Add(log);
+                _db.SaveChanges();
+
+            }
+
+
+
+            objVM.CategoryList = _db.Categories?.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }).ToList();
+
+            objVM.CoverTypeList = _db.CoverTypes?.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }).ToList();
+
             return View(objVM);
         }
 
