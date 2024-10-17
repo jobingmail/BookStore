@@ -15,10 +15,10 @@ namespace BulkyBookCoreMVC.Utility
 
             try
             {
-                SmtpClient smtp = new SmtpClient("consent.herosite.pro", 587);
+                SmtpClient smtp = new SmtpClient("consent.herosite.pro", 465);
 
                 smtp.EnableSsl = true;
-                smtp.Credentials = new NetworkCredential("noreply@jobinworkspace.in", "*79yo98Fz");
+                smtp.Credentials = new NetworkCredential("noreply@jobinworkspace.in", "JY5vF1r8@Nbz&5");
 
                 String from = "noreply@jobinworkspace.in";
                 String to = email;
@@ -38,6 +38,8 @@ namespace BulkyBookCoreMVC.Utility
 
             return Task.CompletedTask;
         }
+
+        
     }
 }
 
